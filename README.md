@@ -42,12 +42,34 @@ In this exercise you will:
 
 **Your Commands & Output**
 
-```bash
-# Paste here the sequence of git commands you ran
-# and the relevant terminal output (e.g., branch listing, merge messages)
-```
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Nick$ cd ..
+nick@DESKTOP-F0EDLD6:/mnt/c/Users$ cd \Projekt
+#nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$sudo git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /mnt/c/Users/Projekt/.git/
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$ touch feature-1
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$ touch feachre-1 feature.txt
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$ cd feature-1
+-bash: cd: feature-1: Not a directory
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$ main feature-1
+Command 'main' not found, did you mean:
+  command 'rain' from deb bsdgames (2.17-30)
+  command 'maim' from deb maim (5.7.4-2)
+  command 'mail' from deb mailutils (1:3.16-1build1)
+  command 'man' from deb man-db (2.12.0-1)
+Try: sudo apt install <deb name>
 
----
+
 
 ### Task 2: Bare Repository on an SSH Server
 
@@ -66,11 +88,48 @@ In this exercise you will:
 
 **Your Commands & Output**
 
-```bash
-# Paste here the push & clone commands and outputs
-```
+nick@DESKTOP-F0EDLD6:/mnt/c/Users/Projekt$ ssh user97@128.140.85.215
+user97@128.140.85.215's password:
+Permission denied, please try again.
+user97@128.140.85.215's password:
+Linux vorlesung 6.1.0-21-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.90-1 (2024-05-03) x86_64
 
----
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon May 19 12:54:03 2025 from 88.153.44.136
+user97@vorlesung:~$ mkdir -p ~/repos/myproject.git && cd ~/repos/myproject.git && git init --bare
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/user97/repos/myproject.git/
+user97@vorlesung:~/repos/myproject.git$
+user97@vorlesung:~/repos/myproject.git$ git remote add origin-ssh user97@128.140.85.215 :~/repos/myproject.git
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch>
+                          master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+user97@vorlesung:~/repos/myproject.git$
+user97@vorlesung:~/repos/myproject.git$ git remote add --mirror=fetch user97@128.140.85.215 :~/repos/myproject.git
+error: remote user97@128.140.85.215 already exists.
+user97@vorlesung:~/repos/myproject.git$
 
 ### Task 3: GitHub & THGA GitLab
 
@@ -88,11 +147,19 @@ In this exercise you will:
 
 **Your Commands & Output**
 
-```bash
-# Paste here the remote‐adding & push outputs
-```
+user97@vorlesung:~/repos/myproject.git$ git remote add github  git@github.com:NickTluczykont/myproject-gh.git
+user97@vorlesung:~/repos/myproject.git$ git remote add gitlab  git@gitlab.thga.de:nick.tluczykont/myproject-gl.git
+user97@vorlesung:~/repos/myproject.git$ git branch
+user97@vorlesung:~/repos/myproject.git$ git main
+git: 'main' is not a git command. See 'git --help'.
 
----
+The most similar command is
+        mailinfo
+user97@vorlesung:~/repos/myproject.git$ git commit -m NickTluczykont/myproject-gh.git
+fatal: this operation must be run in a work tree
+user97@vorlesung:~/repos/myproject.git$ git commit -m nick.tluczykont/myproject-gl.git
+fatal: this operation must be run in a work tree
+
 
 ### Task 4: Fork, Modify, and Pull/Merge Request
 
